@@ -134,7 +134,7 @@ const stars = ref(4);
 }
 
 .my-card {
-  width: calc(33% - 10px); /* Ajusta a largura para incluir a margem */
+  width: calc(20% - 10px); /* Ajusta a largura para incluir a margem */
   margin: 5px; /* Adiciona espaço ao redor de cada cartão */
 }
 
@@ -143,7 +143,7 @@ const stars = ref(4);
     width: calc(
       100% - 20px
     ); /* Em telas menores, os campos ocupam toda a largura menos a margem */
-    margin: 10px; /* Mantém o espaçamento ao redor dos cartões */
+    /* margin: 10px; */ /* Mantém o espaçamento ao redor dos cartões */
   }
 }
 </style>
