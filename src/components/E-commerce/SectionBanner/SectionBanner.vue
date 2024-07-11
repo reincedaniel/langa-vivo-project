@@ -35,9 +35,9 @@ defineOptions({
 });
 
 const images = [
-  "src/assets/images/background/1.jpg",
-  "src/assets/images/background/2.jpg",
-  "src/assets/images/background/3.jpg",
+  "images/background/1.jpg",
+  "images/background/2.jpg",
+  "images/background/3.jpg",
 ];
 const currentImage = ref(images[0]);
 const isFading = ref(false);
