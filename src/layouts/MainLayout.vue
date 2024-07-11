@@ -14,8 +14,17 @@
         </q-toolbar-title>
         <q-btn dense flat round icon="perm_phone_msg" />
         <q-btn dense flat round icon="fa-brands fa-instagram" />
-        <q-btn dense flat round icon="shopping_cart" @click="toggleRightDrawer">
-          <q-badge color="accent" rounded floating />
+        <q-btn
+          v-if="lengthCartProducts"
+          dense
+          flat
+          round
+          icon="shopping_cart"
+          @click="toggleRightDrawer"
+        >
+          <q-badge color="yellow-8" rounded floating>{{
+            lengthCartProducts
+          }}</q-badge>
         </q-btn>
       </q-toolbar>
 
@@ -73,7 +82,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
+import userEcommerceStore from "src/stores/Components/ecommerce";
+const ecommerceStore = userEcommerceStore();
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
@@ -82,6 +93,10 @@ const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
 
+const lengthCartProducts = computed(() => {
+  const result = ecommerceStore.cartProducts || [];
+  return result.length;
+});
 const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value;
 };
