@@ -39,6 +39,7 @@
           ></CardProduct>
         </div>
       </div>
+      <div class="row q-mb-xl"></div>
     </section>
   </q-page>
 </template>

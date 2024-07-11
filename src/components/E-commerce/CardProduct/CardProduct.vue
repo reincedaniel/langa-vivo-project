@@ -30,19 +30,22 @@
             <q-space></q-space>
             <q-badge
               dense
+              outline
               rounded
               class="q-mr-md"
-              color="orange"
-              label="Round"
-            />
+              color="green-5"
+              label="up"
+            >
+              <q-icon name="eva-trending-up-outline"></q-icon>
+            </q-badge>
           </div>
 
           <p @click="verDetalhes()" class="bg animated fadeInDown">
             <q-icon class="mr-1 grey-text" name="bookmark"></q-icon
-            ><span class="category">{{ category }}</span>
+            ><span class="category text-weight-medium">{{ category }}</span>
           </p>
 
-          <h1 @click="verDetalhes()">
+          <h1 @click="verDetalhes()" class="text-bold">
             {{ title.substring(0, 39) }} {{ title.length > 39 ? "..." : "" }}
           </h1>
 
@@ -62,11 +65,11 @@
             />
           </div>
           <div class="row">
-            <span class="text-bold text-body2 text-grey-9 q-mt-xs"
-              >$ {{ price }} 0000
+            <span class="text-bold text-caption text-grey-9 q-mt-xs"
+              >$ {{ price }}
             </span>
             <q-space></q-space>
-            <q-badge class="q-mr-md" outline color="orange" label="Outline" />
+            <q-badge class="q-mr-md" outline rounded color="red" label="10%" />
           </div>
         </div>
         <img
@@ -241,7 +244,6 @@ h1 {
   font-size: 10px;
   width: 110px;
   line-height: 1.3;
-  font-weight: bold;
 }
 
 p {
@@ -265,7 +267,6 @@ p {
   color: rgb(75, 75, 76);
   text-transform: capitalize;
   border-radius: 50px;
-  font-weight: bold;
 }
 .button {
   width: fit-content;

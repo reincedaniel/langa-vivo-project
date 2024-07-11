@@ -1,67 +1,122 @@
 <template>
-  <q-layout view="hHh LpR fFf">
-    <q-header elevated class="bg-white text-black" height-hint="98">
-      <q-toolbar>
-        <!-- <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" /> -->
-
+  <q-layout view="hHh LpR FFF">
+    <q-header elevated class="bg-white text-black">
+      <q-toolbar class="my-header" v-if="!clientStore">
         <q-toolbar-title>
           <q-avatar>
-            <q-icon size="28px" name="fa-solid fa-user-secret" />
+            <q-icon size="22px" name="fa-solid fa-user-secret" />
           </q-avatar>
           <span class="text-bold font-langa-vivo-tl font-size-tl"
-            >langa <span class="text-warning">vivo</span></span
+            >langa.<span class="text-yellow-7">vivo</span></span
           >
         </q-toolbar-title>
-        <q-btn dense flat round icon="perm_phone_msg" />
-        <q-btn dense flat round icon="fa-brands fa-instagram" />
+
+        <span class="text-bold font-langa-vivo-tl">@todos</span>
         <q-btn
-          v-if="lengthCartProducts"
+          @click="toggleLeftDrawer"
           dense
           flat
           round
-          icon="shopping_cart"
-          @click="toggleRightDrawer"
-        >
-          <q-badge color="yellow-8" rounded floating>{{
-            lengthCartProducts
-          }}</q-badge>
-        </q-btn>
+          icon="fa-solid fa-store"
+        />
       </q-toolbar>
 
-      <q-tabs indicator-color="yellow-9" dense align="left">
+      <q-toolbar class="my-header" v-else>
+        <q-toolbar-title>
+          <q-avatar>
+            <q-icon size="22px" name="fa-solid fa-store" />
+          </q-avatar>
+          <span class="text-bold font-langa-vivo-tl font-size-tl"
+            >@{{ clientStore }}</span
+          >
+        </q-toolbar-title>
+
+        <span v-if="false" class="text-bold font-langa-vivo-tl font-size-tl"
+          >langa.<span class="text-yellow-7">vivo</span></span
+        >
+        <q-avatar color="yellow">
+          <q-icon size="22px" name="fa-solid fa-user-secret" />
+        </q-avatar>
+      </q-toolbar>
+
+      <div class="row">
+        <q-input
+          dense
+          bg-color="white"
+          color="grey-9"
+          class="col q-mx-sm font-langa-vivo"
+          v-model="text"
+          input-class="font-langa-vivo"
+          type="text"
+          label="Procurar"
+          filled
+          style="border-bottom: 1px solid transparent"
+        >
+          <template v-slot:prepend>
+            <q-icon name="eva-search-outline" />
+          </template>
+          <template v-slot:append>
+            <q-icon
+              v-if="text !== ''"
+              name="clear"
+              class="cursor-pointer"
+              @click="text = ''"
+            />
+          </template>
+        </q-input>
+        <pre>{{ formatToUrlParam(text) }}</pre>
+      </div>
+      <q-tabs inline-label indicator-color="yellow-9" dense align="left">
         <q-route-tab
+          v-if="!clientStore"
           to="/"
-          label="Page One"
+          label="Tudo"
+          class="border-button-border"
+          no-caps
+        />
+        <q-route-tab
+          v-else
+          :to="`/us/${clientId}`"
+          label="Tudo"
           class="border-button-border"
           no-caps
         />
         <q-route-tab
           to="/page2"
-          label="Page Two"
+          label="Livros"
           class="border-button-border"
           no-caps
         />
         <q-route-tab
           to="/page3"
-          label="Page Three"
+          label="Tickets"
           class="border-button-border"
           no-caps
         />
-        <!-- <q-route-tab
+        <q-route-tab
           to="/page4"
-          label="Page Four"
+          label="Cursos"
           class="border-button-border"
+          no-caps
         />
         <q-route-tab
           to="/page5"
-          label="Page Five"
+          label="Beleza"
           class="border-button-border"
+          no-caps
         />
         <q-route-tab
           to="/page6"
-          label="Page Six"
+          label="Mulher"
           class="border-button-border"
-        /> -->
+          no-caps
+        />
+        <q-route-tab
+          to="/page7"
+          label="Homem"
+          class="border-button-border"
+          no-caps
+        />
       </q-tabs>
     </q-header>
 
@@ -75,35 +130,95 @@
       <pre>Right</pre>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="font-langa-vivo">
       <router-view />
     </q-page-container>
+
+    <q-footer elevated>
+      <q-tabs
+        switch-indicator
+        indicator-color="accent"
+        class="bg-white text-grey-9"
+        align="justify"
+        active-class="text-accent"
+      >
+        <q-route-tab to="/" icon="eva-home" v-if="!clientStore" />
+
+        <q-route-tab :to="`/us/${clientId}`" icon="eva-home" v-else />
+        <q-route-tab icon="eva-person-outline" />
+        <q-route-tab icon="eva-shopping-cart-outline">
+          <q-badge color="yellow-8" rounded floating>{{
+            lengthCartProducts
+          }}</q-badge>
+        </q-route-tab>
+        <q-route-tab @click="toggleRightDrawer" icon="eva-menu-outline" />
+      </q-tabs>
+    </q-footer>
   </q-layout>
 </template>
 
 <script setup>
+import { useRoute } from "vue-router";
 import { onMounted, ref, computed } from "vue";
 import userEcommerceStore from "src/stores/Components/ecommerce";
 const ecommerceStore = userEcommerceStore();
-
+const route = useRoute();
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
+const text = ref("");
+const headerHidden = ref(false);
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
+};
+
+const formatToUrlParam = (input) => {
+  // Substituir caracteres especiais por hífens
+  let formattedString = input
+    .toLowerCase() // converter para minúsculas
+    .replace(/[^a-z0-9]/g, "-") // substituir caracteres especiais por hífens
+    .replace(/-+/g, "-") // remover múltiplos hífens consecutivos
+    .replace(/^-|-$/g, ""); // remover hífens no início e no fim
+
+  // Codificar para URL
+  formattedString = encodeURIComponent(formattedString);
+
+  return formattedString;
 };
 
 const lengthCartProducts = computed(() => {
   const result = ecommerceStore.cartProducts || [];
   return result.length;
 });
+
+const clientStore = computed(() => {
+  const { clientId } = route.params;
+  if (!clientId) {
+    return clientId;
+  } else if (clientId === "101010") {
+    return "Vanessa José";
+  } else {
+    return "Enzadaz";
+  }
+});
+
+const clientId = computed(() => {
+  const { clientId } = route.params;
+  return clientId;
+});
 const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value;
+};
+
+const handleScroll = () => {
+  headerHidden.value = window.scrollY > 0; // altere conforme necessário
 };
 
 onMounted(() => {
   leftDrawerOpen.value = false;
   rightDrawerOpen.value = false;
+
+  window.addEventListener("scroll", handleScroll);
 });
 </script>
 
@@ -112,6 +227,21 @@ onMounted(() => {
   border-radius: 15px;
 }
 .font-size-tl {
-  font-size: 18px;
+  font-size: 14px;
+}
+
+.q-field--standard .q-field__control-wrapper {
+  border-color: transparent;
+}
+
+.header-hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  display: none;
+}
+
+.q-header.scrolled .my-header {
+  transform: translateY(0%);
+  transition: transform 0.3s ease;
 }
 </style>
