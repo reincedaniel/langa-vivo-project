@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.netlify.langa_vivo.twa",
+        "sha256_cert_fingerprints": ["34:07:00:A2:64:49:D0:7E:25:56:96:68:FD:D9:A7:6B:88:FC:5E:B8:F8:38:0E:46:27:DF:3F:99:3D:2E:5F:B8"]
+      }
+    }]
