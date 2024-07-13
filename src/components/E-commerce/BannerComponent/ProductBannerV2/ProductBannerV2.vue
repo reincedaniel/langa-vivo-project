@@ -28,26 +28,41 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-
+import { ref, onMounted, onUnmounted, computed } from "vue";
+const slide = ref(1);
+const autoplay = ref(true);
 defineOptions({
-  name: "SectionBanner",
+  name: "ProductBannerV2",
 });
 
-const images = [
-  "images/background/1.jpg",
-  "images/background/2.jpg",
-  "images/background/3.jpg",
-];
-const currentImage = ref(images[0]);
+const props = defineProps({
+  title: {
+    type: String,
+    default: () => "",
+  },
+  banners: {
+    type: Array,
+  },
+});
+
+const images = computed(() => {
+  const images = [
+    "images/background/1.jpg",
+    "images/background/2.jpg",
+    "images/background/3.jpg",
+  ];
+  return props.banners || images;
+});
+
+const currentImage = ref(images.value[0]);
 const isFading = ref(false);
 let imageIndex = 0;
 
 const changeImage = () => {
   isFading.value = true;
   setTimeout(() => {
-    imageIndex = (imageIndex + 1) % images.length;
-    currentImage.value = images[imageIndex];
+    imageIndex = (imageIndex + 1) % images.value.length;
+    currentImage.value = images.value[imageIndex];
     isFading.value = false;
   }, 1400); // Tempo de duração da transição
 };
@@ -70,7 +85,7 @@ const onClick = () => {
 <style scoped>
 .section-background {
   position: relative;
-  height: 100vh; /* Preenche a altura total da viewport */
+  height: 100vh;
   overflow: hidden;
 }
 

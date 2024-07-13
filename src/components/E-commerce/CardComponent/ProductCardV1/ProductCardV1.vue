@@ -29,6 +29,11 @@
             </q-btn>
             <q-space></q-space>
             <q-badge
+              @click="
+                () => {
+                  showDetail = true;
+                }
+              "
               dense
               outline
               rounded
@@ -64,7 +69,7 @@
               no-caps
             />
           </div>
-          <div class="row">
+          <div class="row" @click="showDetails(true)">
             <span class="text-bold text-caption text-grey-9 q-mt-xs"
               >$ {{ price }}
             </span>
@@ -74,7 +79,6 @@
         </div>
         <img
           style="cursor: pointer"
-          @click="verDetalhes()"
           v-b-modal.modal-center-detail-product
           :src="image"
           width="50px"
@@ -83,14 +87,150 @@
       </div>
     </div>
   </div>
+  <q-dialog
+    :full-width="$q.platform.is.mobile"
+    v-model="showDetail"
+    position="bottom"
+  >
+    <q-card
+      :style="!$q.platform.is.mobile ? 'width: 700px; max-width: 80vw;' : ''"
+    >
+      <q-linear-progress :value="1" color="grey-8" />
+      <q-card-section class="row items-center no-wrap">
+        <div>
+          <div class="text-weight-bold">The Walker</div>
+          <div class="text-grey">Fitz & The Tantrums</div>
+        </div>
+
+        <q-space />
+
+        <q-btn flat round icon="close" v-close-popup />
+      </q-card-section>
+      <q-card-section class="row col">
+        <q-list>
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="primary" name="local_bar" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Bar XYZ</q-item-label>
+              <q-item-label caption>Have a drink.</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="red" name="local_gas_station" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Gas Station</q-item-label>
+              <q-item-label caption>Fill your gas tank.</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="amber" name="local_movies" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Cinema XYZ</q-item-label>
+              <q-item-label caption>Watch a movie.</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+      <q-card-section class="row col">
+        <q-list>
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="primary" name="local_bar" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Bar XYZ</q-item-label>
+              <q-item-label caption>Have a drink.</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="red" name="local_gas_station" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Gas Station</q-item-label>
+              <q-item-label caption>Fill your gas tank.</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="amber" name="local_movies" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Cinema XYZ</q-item-label>
+              <q-item-label caption>Watch a movie.</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+      <q-card-section class="row col">
+        <q-list>
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="primary" name="local_bar" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Bar XYZ</q-item-label>
+              <q-item-label caption>Have a drink.</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="red" name="local_gas_station" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Gas Station</q-item-label>
+              <q-item-label caption>Fill your gas tank.</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon color="amber" name="local_movies" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Cinema XYZ</q-item-label>
+              <q-item-label caption>Watch a movie.</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script setup>
 import userEcommerceStore from "src/stores/Components/ecommerce";
+import { useQuasar } from "quasar";
+import { computed, ref } from "vue";
 
-import { computed } from "vue";
+defineOptions({
+  name: "ProductCardV1",
+});
 
 const ecommerceStore = userEcommerceStore();
+const $q = useQuasar();
+
+const showDetail = ref(false);
 
 const props = defineProps({
   id: {
@@ -123,6 +263,61 @@ const props = defineProps({
   },
 });
 
+const showDetails = (grid) => {
+  $q.bottomSheet({
+    message: "Bottom Sheet message",
+    grid,
+    actions: [
+      {
+        label: "Drive",
+        img: "https://cdn.quasar.dev/img/logo_drive_128px.png",
+        id: "drive",
+      },
+      {
+        label: "Keep",
+        img: "https://cdn.quasar.dev/img/logo_keep_128px.png",
+        id: "keep",
+      },
+      {
+        label: "Google Hangouts",
+        img: "https://cdn.quasar.dev/img/logo_hangouts_128px.png",
+        id: "calendar",
+      },
+      {
+        label: "Calendar",
+        img: "https://cdn.quasar.dev/img/logo_calendar_128px.png",
+        id: "calendar",
+      },
+      {},
+      {
+        label: "Share",
+        icon: "share",
+        id: "share",
+      },
+      {
+        label: "Upload",
+        icon: "cloud_upload",
+        color: "primary",
+        id: "upload",
+      },
+      {},
+      {
+        label: "John",
+        avatar: "https://cdn.quasar.dev/img/boy-avatar.png",
+        id: "john",
+      },
+    ],
+  })
+    .onOk((action) => {
+      // console.log('Action chosen:', action.id)
+    })
+    .onCancel(() => {
+      // console.log('Dismissed')
+    })
+    .onDismiss(() => {
+      // console.log('I am triggered on both OK and Cancel')
+    });
+};
 const favoriteProducts = computed(() => {
   return ecommerceStore.favoriteProducts;
 });
