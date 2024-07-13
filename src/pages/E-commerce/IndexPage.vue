@@ -1,26 +1,47 @@
 <template>
   <q-page class="page-container">
     <ProductBannerV1 />
-    <ProductListCarouselV1
+
+    <ProductListV1
       title="Baseado nas suas tendências de compra:"
       iconTitle="bookmark"
-      class="bg-red-2"
-    ></ProductListCarouselV1>
+      class="q-pt-xs q-pb-md"
+    ></ProductListV1>
+
     <ProductListV2
       title="Baseado nas suas tendências de compra:"
       iconTitle="bookmark"
-      class="bg-red-2"
+      class="bg-grey-2 q-pt-xs q-pb-md"
     ></ProductListV2>
-    <ProductListV1
-      title="Baseado nas suas tendências de compra:"
-      iconTitle="bookmark"
-      class="bg-red-2"
-    ></ProductListV1>
+
     <ProductListV1
       title="As suas reomendações:"
       iconTitle="star"
-      class="bg-red-2"
+      class="q-pt-xs q-pb-md"
     ></ProductListV1>
+
+    <div class="row">
+      <ProductListCarouselV1
+        title="Baseado nas suas tendências de compra:"
+        iconTitle="bookmark"
+        class="bg-grey-2 q-pt-xs"
+      ></ProductListCarouselV1>
+      <ProductListCarouselV1
+        title="Baseado nas suas tendências de compra:"
+        iconTitle="bookmark"
+        class="bg-grey-2 q-pt-xs"
+      ></ProductListCarouselV1>
+      <ProductListCarouselV1
+        title="Baseado nas suas tendências de compra:"
+        iconTitle="bookmark"
+        class="bg-grey-2 q-pt-xs"
+      ></ProductListCarouselV1>
+      <ProductListCarouselV1
+        title="Baseado nas suas tendências de compra:"
+        iconTitle="bookmark"
+        class="bg-grey-2 q-pt-xs"
+      ></ProductListCarouselV1>
+    </div>
   </q-page>
 </template>
 

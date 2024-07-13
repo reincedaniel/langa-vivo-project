@@ -18,16 +18,15 @@
     >
       <div class="overlay"></div>
       <div class="content q-mx-md">
-        <h6 class="text-white font-langa-vivo-tl text-body2">
-          Venha ser um
-          <span class="text-bold text-italic">langa vivo</span>, junta-te a esta
-          grande família.
-        </h6>
+        <h6
+          class="text-white font-langa-vivo-tl text-body2 text-center"
+          v-html="title"
+        ></h6>
         <q-btn
           class="font-langa-vivo-tl"
           color="grey-2"
           icon="check"
-          label="Inscreva-te agora mesmo!"
+          :label="titleSubtitle"
           no-caps
           outline
           @click="onClick"
@@ -48,7 +47,13 @@ defineOptions({
 const props = defineProps({
   title: {
     type: String,
-    default: () => "",
+    default: () => `Venha ser um
+          <span class="text-bold text-italic">langa vivo</span>, junta-te a esta
+          grande família.`,
+  },
+  titleSubtitle: {
+    type: String,
+    default: () => `Inscreva-te agora mesmo!`,
   },
   banners: {
     type: Array,
@@ -57,9 +62,9 @@ const props = defineProps({
 
 const images = computed(() => {
   const images = [
-    "images/background/1.jpg",
-    "images/background/2.jpg",
-    "images/background/3.jpg",
+    `${window.location.origin}/images/background/1.jpg`,
+    `${window.location.origin}/images/background/2.jpg`,
+    `${window.location.origin}/images/background/3.jpg`,
   ];
   return props.banners || images;
 });

@@ -52,19 +52,25 @@
           filled
           style="border-bottom: 1px solid transparent"
         >
-          <template v-slot:prepend>
-            <q-icon name="eva-search-outline" />
-          </template>
           <template v-slot:append>
+            <q-btn
+              color="grey"
+              icon="eva-search-outline"
+              round
+              :flat="text"
+              dense
+              @click="onClick"
+            />
+          </template>
+          <!--prepend <template v-slot:append>
             <q-icon
               v-if="text !== ''"
               name="clear"
               class="cursor-pointer"
               @click="text = ''"
             />
-          </template>
+          </template> -->
         </q-input>
-        <pre>{{ formatToUrlParam(text) }}</pre>
       </div>
       <q-tabs inline-label indicator-color="yellow-9" dense align="left">
         <q-route-tab

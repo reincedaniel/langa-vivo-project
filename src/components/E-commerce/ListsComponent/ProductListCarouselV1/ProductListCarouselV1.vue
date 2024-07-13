@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="row q-my-md q-mx-sm">
+    <div class="row q-mt-md">
       <q-icon size="22px" class="mr-1 grey-text" :name="iconTitle"></q-icon>
       <span
         style="font-weight: 500"
@@ -12,16 +12,17 @@
       <div class="row">
         <q-carousel
           v-model="slide"
-          transition-prev="jump-right"
-          transition-next="jump-left"
+          transition-prev="slide-right"
+          transition-next="slide-left"
           swipeable
           animated
           control-color="white"
-          prev-icon="arrow_left"
-          next-icon="arrow_right"
           control-text-color="grey"
           padding
+          autoplay=""
           arrows
+          class="bg-transparent"
+          height="300px"
         >
           <q-carousel-slide
             v-for="(product, index) in products"

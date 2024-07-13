@@ -47,9 +47,9 @@ const props = defineProps({
 
 const images = computed(() => {
   const images = [
-    "images/background/1.jpg",
-    "images/background/2.jpg",
-    "images/background/3.jpg",
+    `${window.location.origin}/images/background/1.jpg`,
+    `${window.location.origin}/images/background/2.jpg`,
+    `${window.location.origin}/images/background/3.jpg`,
   ];
   return props.banners || images;
 });
