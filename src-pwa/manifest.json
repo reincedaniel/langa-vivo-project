@@ -1,4 +1,7 @@
 {
+  "name": "Langa Vivo",
+  "short_name": "Langa Vivo",
+  "description": "Aplicativo de vendas/prestação de serviços",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#027be3",
