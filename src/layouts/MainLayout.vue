@@ -39,7 +39,7 @@
         </q-avatar>
       </q-toolbar>
 
-      <div class="row">
+      <div v-if="mainLayoutStore.showSearch" class="row">
         <q-input
           dense
           bg-color="white"
@@ -72,21 +72,15 @@
           </template> -->
         </q-input>
       </div>
-      <q-tabs inline-label indicator-color="yellow-9" dense align="left">
-        <q-route-tab
-          v-if="!clientStore"
-          to="/"
-          label="Tudo"
-          class="border-button-border"
-          no-caps
-        />
-        <q-route-tab
-          v-else
-          :to="`/us/${clientId}`"
-          label="Tudo"
-          class="border-button-border"
-          no-caps
-        />
+      <q-tabs
+        v-if="mainLayoutStore.showCategory"
+        inline-label
+        indicator-color="yellow-7"
+        class="bg-yellow-1"
+        dense
+        align="left"
+      >
+        <q-route-tab to="/" label="Tudo" class="border-button-border" no-caps />
         <q-route-tab
           to="/page2"
           label="Livros"
@@ -148,9 +142,7 @@
         align="justify"
         active-class="text-accent"
       >
-        <q-route-tab to="/" icon="eva-home" v-if="!clientStore" />
-
-        <q-route-tab :to="`/us/${clientId}`" icon="eva-home" v-else />
+        <q-route-tab to="/" icon="eva-home" />
         <q-route-tab icon="eva-person-outline" />
         <q-route-tab icon="eva-shopping-cart-outline">
           <q-badge color="yellow-8" rounded floating>{{
@@ -167,7 +159,11 @@
 import { useRoute } from "vue-router";
 import { onMounted, ref, computed } from "vue";
 import userEcommerceStore from "src/stores/Components/ecommerce";
+import userMainLayoutStore from "src/stores/Layout/MainLayout";
+
 const ecommerceStore = userEcommerceStore();
+const mainLayoutStore = userMainLayoutStore();
+
 const route = useRoute();
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
@@ -198,7 +194,8 @@ const lengthCartProducts = computed(() => {
 });
 
 const clientStore = computed(() => {
-  const { clientId } = route.params;
+  const { us } = route.query;
+  const clientId = us;
   if (!clientId) {
     return clientId;
   } else if (clientId === "101010") {
@@ -209,7 +206,8 @@ const clientStore = computed(() => {
 });
 
 const clientId = computed(() => {
-  const { clientId } = route.params;
+  const { us } = route.query;
+  const clientId = us;
   return clientId;
 });
 const toggleRightDrawer = () => {

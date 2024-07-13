@@ -9,7 +9,7 @@
       >
     </div>
     <div class="row">
-      <div class="form-wrapper justify-center">
+      <div class="form-wrapper justify-evenly">
         <ProductCardV1
           v-for="product in products"
           :key="product.id"

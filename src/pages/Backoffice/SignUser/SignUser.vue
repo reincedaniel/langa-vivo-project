@@ -50,9 +50,17 @@ import ProductBannerV1 from "src/components/E-commerce/BannerComponent/ProductBa
 import ProductListCarouselV1 from "src/components/E-commerce/ListsComponent/ProductListCarouselV1/ProductListCarouselV1.vue";
 import ProductListV1 from "src/components/E-commerce/ListsComponent/ProductListV1/ProductListV1.vue";
 import ProductListV2 from "src/components/E-commerce/ListsComponent/ProductListV2/ProductListV2.vue";
+import { onMounted } from "vue";
+
+import userMainLayoutStore from "src/stores/Layout/MainLayout";
+const mainLayoutStore = userMainLayoutStore();
 
 defineOptions({
   name: "IndexPage",
+});
+
+onMounted(() => {
+  mainLayoutStore.disableSearchAndCategory();
 });
 </script>
 

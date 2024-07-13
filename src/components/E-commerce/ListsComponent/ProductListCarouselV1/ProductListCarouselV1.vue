@@ -1,10 +1,11 @@
 <template>
   <section class="section">
     <div class="row q-mt-md">
-      <q-icon size="22px" class="mr-1 grey-text" :name="iconTitle"></q-icon>
       <span
         style="font-weight: 500"
         class="text-subtitle2text-grey-9 font-langa-vivo"
+      >
+        <q-icon size="22px" class="mr-1 grey-text" :name="iconTitle"></q-icon
         >{{ title }}</span
       >
     </div>
