@@ -155,7 +155,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer elevated>
+    <q-footer v-if="mainLayoutStore.showMenuBottom" elevated>
       <q-tabs
         switch-indicator
         indicator-color="accent"

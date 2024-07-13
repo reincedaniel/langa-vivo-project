@@ -1,10 +1,13 @@
 {
+  "id": "langa.vivo",
   "name": "Langa Vivo",
   "short_name": "Langa Vivo",
   "description": "Aplicativo de vendas/prestação de serviços",
+  "display": "standalone",
+  "start_url": "/",
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#027be3",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "icons/icon-128x128.png",
@@ -30,6 +33,58 @@
       "src": "icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }
+  ],
+  "lang": "pa",
+  "categories": [
+    "books",
+    "business",
+    "education",
+    "entertainment",
+    "finance",
+    "fitness",
+    "food",
+    "games",
+    "health",
+    "kids",
+    "lifestyle",
+    "magazines",
+    "music",
+    "navigation",
+    "news",
+    "personalization",
+    "photo",
+    "productivity",
+    "shopping",
+    "social",
+    "sports",
+    "travel",
+    "utilities"
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/p1.png",
+      "sizes": "393x848",
+      "type": "image/png",
+      "platform": "wide"
+    },
+    {
+      "src": "screenshots/p2.png",
+      "sizes": "389x841",
+      "type": "image/png",
+      "platform": "wide"
+    },
+    {
+      "src": "screenshots/p3.png",
+      "sizes": "390x845",
+      "type": "image/png",
+      "platform": "wide"
+    },
+    {
+      "src": "screenshots/p4.png",
+      "sizes": "391x844",
+      "type": "image/png",
+      "platform": "wide"
     }
   ]
 }
