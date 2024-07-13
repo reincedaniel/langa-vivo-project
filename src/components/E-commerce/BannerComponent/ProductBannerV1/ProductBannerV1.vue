@@ -29,7 +29,7 @@
           :label="titleSubtitle"
           no-caps
           outline
-          @click="onClick"
+          to="/sign"
         />
       </div>
     </q-carousel-slide>
