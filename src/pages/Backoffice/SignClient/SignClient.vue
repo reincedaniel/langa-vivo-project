@@ -1,15 +1,15 @@
 <template>
   <q-page class="page-container">
-    <SignComponent
+    <!--  <SignComponent
       title="Iniciar Sessão/Registrar"
       description="Ganhe desconto veja mais"
-    ></SignComponent>
+    ></SignComponent> -->
 
-    <!--   <SignComponent
+    <SignComponent
       be-langa
       title="Área do Empreendedor"
       description="Ser um Langa.Vivo / Já sou Um Langa.Vivo"
-    ></SignComponent> -->
+    ></SignComponent>
   </q-page>
 </template>
 
@@ -22,7 +22,7 @@ import userMainLayoutStore from "src/stores/Layout/MainLayout";
 const mainLayoutStore = userMainLayoutStore();
 
 defineOptions({
-  name: "SignUser",
+  name: "SignClient",
 });
 
 onMounted(() => {

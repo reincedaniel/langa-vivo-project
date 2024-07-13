@@ -1,12 +1,7 @@
 import { api } from "src/boot/axios";
-import axios from "axios";
 
 export default {
   getProducts() {
-    console.log("API:");
-    console.log(api);
-    console.log("axios:");
-    console.log(axios);
     return new Promise((resolve, reject) => {
       api
         .get(`/products`)

@@ -24,6 +24,16 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/sign-client",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Backoffice/SignClient/SignClient.vue"),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

@@ -46,13 +46,21 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
+
 import ProductBannerV1 from "src/components/E-commerce/BannerComponent/ProductBannerV1/ProductBannerV1.vue";
 import ProductListCarouselV1 from "src/components/E-commerce/ListsComponent/ProductListCarouselV1/ProductListCarouselV1.vue";
 import ProductListV1 from "src/components/E-commerce/ListsComponent/ProductListV1/ProductListV1.vue";
 import ProductListV2 from "src/components/E-commerce/ListsComponent/ProductListV2/ProductListV2.vue";
+import userMainLayoutStore from "src/stores/Layout/MainLayout";
+const mainLayoutStore = userMainLayoutStore();
 
 defineOptions({
   name: "IndexPage",
+});
+onMounted(() => {
+  mainLayoutStore.enableSearchAndCategory();
+  mainLayoutStore.disableHeaderBackgroundColor();
 });
 </script>
 

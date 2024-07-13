@@ -29,7 +29,7 @@
           :label="titleSubtitle"
           no-caps
           outline
-          to="/sign"
+          to="/sign-client"
         />
       </div>
     </q-carousel-slide>

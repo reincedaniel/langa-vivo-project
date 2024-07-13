@@ -1,24 +1,34 @@
 <template>
   <q-layout view="hHh LpR FFF">
-    <q-header elevated class="bg-white text-black">
+    <q-header
+      elevated
+      :class="
+        mainLayoutStore.isHeaderBackgroundColor
+          ? 'bg-black text-white'
+          : 'bg-white text-black'
+      "
+    >
       <q-toolbar class="my-header" v-if="!clientStore">
         <q-toolbar-title>
           <q-avatar>
             <q-icon size="22px" name="fa-solid fa-user-secret" />
           </q-avatar>
           <span class="text-bold font-langa-vivo-tl font-size-tl"
-            >langa.<span class="text-yellow-7">vivo</span></span
+            >langa.<span
+              class="text-white"
+              :class="
+                mainLayoutStore.isHeaderBackgroundColor
+                  ? 'text-yellow-8'
+                  : 'text-yellow-8'
+              "
+              >vivo</span
+            ></span
           >
         </q-toolbar-title>
 
-        <span class="text-bold font-langa-vivo-tl">@todos</span>
-        <q-btn
-          @click="toggleLeftDrawer"
-          dense
-          flat
-          round
-          icon="fa-solid fa-store"
-        />
+        <!-- <span class="text-bold font-langa-vivo-tl">@todos</span> -->
+        <q-btn to="/" dense flat round icon="fa-solid fa-store" />
+        <q-btn to="/sign" dense flat round icon="fa-solid fa-user" />
       </q-toolbar>
 
       <q-toolbar class="my-header" v-else>
@@ -120,12 +130,23 @@
       </q-tabs>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" side="left" overlay>
+    <q-drawer
+      v-model="leftDrawerOpen"
+      v-if="mainLayoutStore.showDrawerLeft"
+      side="left"
+      overlay
+    >
       <!-- drawer content -->
       <pre>Left</pre>
     </q-drawer>
 
-    <q-drawer v-model="rightDrawerOpen" side="right" class="bg-warning" overlay>
+    <q-drawer
+      v-model="rightDrawerOpen"
+      v-if="mainLayoutStore.showDrawerRight"
+      side="right"
+      class="bg-warning"
+      overlay
+    >
       <!-- drawer content -->
       <pre>Right</pre>
     </q-drawer>
@@ -174,20 +195,6 @@ const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
 
-const formatToUrlParam = (input) => {
-  // Substituir caracteres especiais por hífens
-  let formattedString = input
-    .toLowerCase() // converter para minúsculas
-    .replace(/[^a-z0-9]/g, "-") // substituir caracteres especiais por hífens
-    .replace(/-+/g, "-") // remover múltiplos hífens consecutivos
-    .replace(/^-|-$/g, ""); // remover hífens no início e no fim
-
-  // Codificar para URL
-  formattedString = encodeURIComponent(formattedString);
-
-  return formattedString;
-};
-
 const lengthCartProducts = computed(() => {
   const result = ecommerceStore.cartProducts || [];
   return result.length;
@@ -205,11 +212,6 @@ const clientStore = computed(() => {
   }
 });
 
-const clientId = computed(() => {
-  const { us } = route.query;
-  const clientId = us;
-  return clientId;
-});
 const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value;
 };
