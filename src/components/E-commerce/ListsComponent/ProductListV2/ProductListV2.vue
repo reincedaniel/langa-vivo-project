@@ -11,11 +11,31 @@
     <div class="row">
       <div class="form-wrapper justify-evenly">
         <ProductCardV2
-          v-for="product in products"
+          v-for="product in paginatedProducts"
           :key="product.id"
           v-bind="product"
         ></ProductCardV2>
       </div>
+    </div>
+    <div v-if="products.length > 20" class="row pagination-controls">
+      <q-btn
+        color="grey-9"
+        dense
+        flat
+        icon="fa-solid fa-angles-left"
+        @click="prevPage"
+        :disabled="currentPage === 1"
+      />
+      <span>Pág. {{ currentPage }} de {{ totalPages }}</span>
+
+      <q-btn
+        color="grey-9"
+        dense
+        flat
+        icon="fa-solid fa-angles-right"
+        @click="nextPage"
+        :disabled="currentPage === totalPages"
+      />
     </div>
   </section>
 </template>
@@ -46,22 +66,43 @@ const props = defineProps({
   },
 });
 
-const title = computed(() => {
-  return props.title;
+const title = computed(() => props.title);
+const iconTitle = computed(() => props.iconTitle);
+const products = computed(
+  () => props.products || ecommerceStore.products || []
+);
+
+const itemsPerPage = 20;
+const currentPage = ref(1);
+
+const totalPages = computed(() => {
+  return Math.ceil(products.value.length / itemsPerPage);
 });
-const iconTitle = computed(() => {
-  return props.iconTitle;
+
+const paginatedProducts = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return products.value.slice(start, end);
 });
-const products = computed(() => {
-  return props.products || ecommerceStore.products;
-});
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+};
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
+
 const getProducts = async () => {
   loading.value = true;
   const res = await ecommerceStore.getProducts();
+  loading.value = false;
   if (res && res.status === 200) {
-    loading.value = false;
-  } else {
-    loading.value = false;
+    currentPage.value = 1; // Reset to first page when products are fetched
   }
 };
 
@@ -93,5 +134,22 @@ onMounted(() => {
   .my-card {
     width: 100%;
   }
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.pagination-controls button {
+  margin: 0 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.pagination-controls span {
+  font-size: 14px;
 }
 </style>
