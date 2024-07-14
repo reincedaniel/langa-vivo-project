@@ -4,12 +4,6 @@
       title="Iniciar Sessão/Registrar"
       description="Ganhe desconto veja mais"
     ></SignComponent>
-
-    <!--   <SignComponent
-      be-langa
-      title="Área do Empreendedor"
-      description="Ser um Langa.Vivo / Já sou Um Langa.Vivo"
-    ></SignComponent> -->
   </q-page>
 </template>
 
@@ -27,7 +21,7 @@ defineOptions({
 
 onMounted(() => {
   mainLayoutStore.disableSearchAndCategory();
-  mainLayoutStore.changeHeaderBackgroundColor();
+  mainLayoutStore.enableHeaderBackgroundColor();
 });
 </script>
 

@@ -27,8 +27,25 @@
         </q-toolbar-title>
 
         <!-- <span class="text-bold font-langa-vivo-tl">@todos</span> -->
-        <q-btn to="/" dense flat round icon="fa-solid fa-store" />
-        <q-btn to="/sign" dense flat round icon="fa-solid fa-user" />
+        <q-btn
+          v-if="routePathActive !== '/'"
+          to="/"
+          dense
+          flat
+          round
+          icon="fa-solid fa-store"
+        />
+        <q-btn
+          v-show="false"
+          v-if="
+            routePathActive !== '/sign' && routePathActive !== '/sign-client'
+          "
+          to="/sign"
+          dense
+          flat
+          round
+          icon="fa-solid fa-user"
+        />
       </q-toolbar>
 
       <q-toolbar class="my-header" v-else>
@@ -198,6 +215,10 @@ const toggleLeftDrawer = () => {
 const lengthCartProducts = computed(() => {
   const result = ecommerceStore.cartProducts || [];
   return result.length;
+});
+
+const routePathActive = computed(() => {
+  return route?.path;
 });
 
 const clientStore = computed(() => {

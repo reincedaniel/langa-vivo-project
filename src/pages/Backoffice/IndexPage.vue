@@ -1,25 +1,16 @@
 <template>
-  <q-page class="page-container">
-    <SignClientComponent
-      be-langa
-      title="Área do Empreendedor"
-      description="Ser um Langa.Vivo / Já sou Um Langa.Vivo"
-    ></SignClientComponent>
-  </q-page>
+  <q-page class="page-container"> TESTE </q-page>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
-import SignClientComponent from "src/components/Generic/SignClientComponent/SignClientComponent.vue";
 
 import userMainLayoutStore from "src/stores/Layout/MainLayout";
-
 const mainLayoutStore = userMainLayoutStore();
 
 defineOptions({
-  name: "SignClient",
+  name: "IndexPage",
 });
-
 onMounted(() => {
   mainLayoutStore.disableSearchAndCategory();
   mainLayoutStore.enableHeaderBackgroundColor();

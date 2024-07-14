@@ -87,14 +87,8 @@
       </div>
     </div>
   </div>
-  <q-dialog
-    :full-width="$q.platform.is.mobile"
-    v-model="showDetail"
-    position="bottom"
-  >
-    <q-card
-      :style="!$q.platform.is.mobile ? 'width: 700px; max-width: 80vw;' : ''"
-    >
+  <q-dialog v-model="showDetail" position="bottom" persistent>
+    <q-card style="width: 1000px; max-width: 100vw">
       <q-linear-progress :value="1" color="grey-8" />
       <q-card-section class="row items-center no-wrap">
         <div>

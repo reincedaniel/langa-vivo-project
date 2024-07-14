@@ -25,6 +25,16 @@ const routes = [
     ],
   },
   {
+    path: "/backoffice",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Backoffice/IndexPage.vue"),
+      },
+    ],
+  },
+  {
     path: "/sign-client",
     component: () => import("layouts/MainLayout.vue"),
     children: [
