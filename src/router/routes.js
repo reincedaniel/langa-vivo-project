@@ -20,17 +20,17 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("pages/Backoffice/SignUser/SignUser.vue"),
+        component: () => import("pages/E-commerce/SignUser/SignUser.vue"),
       },
     ],
   },
   {
-    path: "/backoffice",
-    component: () => import("layouts/MainLayout.vue"),
+    path: "/user",
+    component: () => import("layouts/UserLayout.vue"),
     children: [
       {
         path: "",
-        component: () => import("pages/Backoffice/IndexPage.vue"),
+        component: () => import("pages/E-commerce/UserProfile/UserProfile.vue"),
       },
     ],
   },

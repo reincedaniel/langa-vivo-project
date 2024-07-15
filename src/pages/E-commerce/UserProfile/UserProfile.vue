@@ -156,7 +156,9 @@ const screenWidth = ref(window.innerWidth);
 import userMainLayoutStore from "src/stores/Layout/MainLayout";
 
 const mainLayoutStore = userMainLayoutStore();
-
+defineOptions({
+  name: "UserProfile",
+});
 window.addEventListener("resize", () => {
   screenWidth.value = window.innerWidth;
 });

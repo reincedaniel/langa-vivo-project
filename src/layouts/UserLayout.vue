@@ -1,28 +1,13 @@
 <template>
   <q-layout view="hHh LpR FFF">
-    <q-header
-      elevated
-      :class="
-        mainLayoutStore.isHeaderBackgroundColor
-          ? 'bg-black text-white'
-          : 'bg-white text-black'
-      "
-    >
+    <q-header elevated class="bg-black text-white">
       <q-toolbar class="my-header" v-if="!clientStore">
         <q-toolbar-title>
           <q-avatar>
             <q-icon size="22px" name="fa-solid fa-user-secret" />
           </q-avatar>
           <span class="text-bold font-langa-vivo-tl font-size-tl"
-            >langa.<span
-              class="text-white"
-              :class="
-                mainLayoutStore.isHeaderBackgroundColor
-                  ? 'text-yellow-8'
-                  : 'text-yellow-8'
-              "
-              >vivo</span
-            ></span
+            >langa.<span class="text-yellow-8">vivo</span></span
           >
         </q-toolbar-title>
 
@@ -36,6 +21,7 @@
           icon="fa-solid fa-store"
         />
         <q-btn
+          v-show="false"
           v-if="
             routePathActive !== '/sign' && routePathActive !== '/sign-client'
           "
@@ -65,44 +51,10 @@
         </q-avatar>
       </q-toolbar>
 
-      <div v-if="mainLayoutStore.showSearch" class="row">
-        <q-input
-          dense
-          bg-color="white"
-          color="grey-9"
-          class="col q-mx-sm font-langa-vivo"
-          v-model="text"
-          input-class="font-langa-vivo"
-          type="text"
-          label="Procurar"
-          filled
-          style="border-bottom: 1px solid transparent"
-        >
-          <template v-slot:append>
-            <q-btn
-              color="grey"
-              icon="eva-search-outline"
-              round
-              :flat="text"
-              dense
-              @click="onClick"
-            />
-          </template>
-          <!--prepend <template v-slot:append>
-            <q-icon
-              v-if="text !== ''"
-              name="clear"
-              class="cursor-pointer"
-              @click="text = ''"
-            />
-          </template> -->
-        </q-input>
-      </div>
       <q-tabs
-        v-if="mainLayoutStore.showCategory"
         inline-label
         indicator-color="yellow-7"
-        class="bg-yellow-1"
+        class="bg-black"
         dense
         align="left"
       >
@@ -201,6 +153,9 @@ import userMainLayoutStore from "src/stores/Layout/MainLayout";
 const ecommerceStore = userEcommerceStore();
 const mainLayoutStore = userMainLayoutStore();
 
+defineOptions({
+  name: "UserLayout",
+});
 const route = useRoute();
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);

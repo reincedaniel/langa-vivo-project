@@ -58,11 +58,7 @@
                   class="col-12"
                   color="black"
                   label="Iniciar Sessão"
-                  @click="
-                    () => {
-                      showDetail = true;
-                    }
-                  "
+                  to="/user"
                   square
                 />
               </div>
