@@ -10,6 +10,9 @@ import axios from "axios";
 const api = axios.create({
   baseURL: process.env.VUE_APP_API,
 });
+const apiBase = axios.create({
+  baseURL: process.env.VUE_API_BASE,
+});
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -19,8 +22,9 @@ export default boot(({ app }) => {
   //       so you won't necessarily have to import axios in each vue file
 
   app.config.globalProperties.$api = api;
+  app.config.globalProperties.$apiBase = apiBase;
   // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
   //       so you can easily perform requests against your app's API
 });
 
-export { api };
+export { api, apiBase };

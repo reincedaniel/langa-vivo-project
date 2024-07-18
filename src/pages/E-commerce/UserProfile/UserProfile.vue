@@ -105,7 +105,7 @@
           </q-card-section>
 
           <!-- Conteúdo principal -->
-          <div class="text-center q-ma-xs">
+          <div v-if="false" class="text-center q-ma-xs">
             <q-banner
               icon="sentiment_very_dissatisfied"
               dense
@@ -115,6 +115,11 @@
             </q-banner>
           </div></q-card
         >
+        <q-card-section
+          class="row justify-between bg-red-1 no-padding q-py-xl bg-grey-2"
+        >
+          <categoryComponent></categoryComponent>
+        </q-card-section>
       </div>
 
       <div class="sidebar right-sidebar col-12 col-md-2 q-mb-md shadow-0">
@@ -151,6 +156,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import MenuComponent from "src/components/E-commerce/MenuComponent/MenuComponent.vue";
+import CategoryComponent from "src/components/Backoffice/CategoryComponent/CategoryComponent.vue";
 
 const screenWidth = ref(window.innerWidth);
 import userMainLayoutStore from "src/stores/Layout/MainLayout";
@@ -162,6 +168,7 @@ defineOptions({
 window.addEventListener("resize", () => {
   screenWidth.value = window.innerWidth;
 });
+
 const items = ref([
   { icon: "receipt", label: "Cupons" },
   { icon: "star", label: "Pontos" },
