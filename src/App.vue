@@ -3,6 +3,15 @@
 </template>
 
 <script setup>
+import { useQuasar } from "quasar";
+
+const $q = useQuasar();
+
+$q.loadingBar.setDefaults({
+  color: "yellow-8",
+  size: "5px",
+  position: "bottom",
+});
 defineOptions({
   name: "App",
 });

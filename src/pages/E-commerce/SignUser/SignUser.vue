@@ -1,7 +1,7 @@
 <template>
   <q-page class="page-container">
     <SignComponent
-      title="Iniciar Sessão/Registrar"
+      title="Iniciar Sessão"
       description="Ganhe desconto veja mais"
     ></SignComponent>
   </q-page>

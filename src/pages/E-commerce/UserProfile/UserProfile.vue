@@ -192,6 +192,7 @@ onMounted(() => {
 
 <style scoped>
 .personal-center-page {
+  min-height: fit-content !important;
   margin: 5px;
 }
 

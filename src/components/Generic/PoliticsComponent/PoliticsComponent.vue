@@ -1,5 +1,7 @@
 <template>
-  <div class="row col-12 justify-center q-py-md text-center text-caption">
+  <div
+    class="row cursor-pointer col-12 justify-center q-py-md text-center text-caption"
+  >
     <span
       >Ao continuar, você concorda com nossa
       <span class="text-blue"

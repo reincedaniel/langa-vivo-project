@@ -5,14 +5,8 @@
     >
       <div class="row">
         <div class="col-12 justify-center text-center">
-          <span class="text-bold text-h6">
-            <q-icon
-              name="fa-solid fa-gears"
-              size="35px"
-              class="q-mr-sm"
-            ></q-icon>
-            {{ title }}</span
-          >
+          <q-icon name="fa-solid fa-gears" size="35px" class="q-mr-sm"></q-icon>
+          <span class="text-bold text-h6"> {{ title }}</span>
         </div>
         <div
           style="font-weight: 600"
@@ -23,7 +17,7 @@
         <div class="col-12 justify-center q-py-md">
           <q-input
             stack-label
-            v-model="text"
+            v-model="email"
             square
             outlined
             dense
@@ -32,17 +26,49 @@
             label="Número de telemóvel ou E-mail:"
           />
         </div>
+
+        <div class="col-12 justify-center q-py-xs">
+          <q-input
+            stack-label
+            v-model="text"
+            square
+            outlined
+            dense
+            type="password"
+            color="grey-9"
+            label="Palavra-Passe"
+          />
+        </div>
+
+        <div class="row col-12 q-py-sm text-grey-8 text-caption cursor-pointer">
+          <q-space></q-space>
+          <span>Esqueceu a palavra-passe</span>
+        </div>
+
+        <div class="row col-12 justify-center">
+          <q-btn
+            class="col-12"
+            color="black"
+            label="Iniciar Sessão"
+            to="/user"
+            square
+          />
+        </div>
+        <!-- ------------ -->
+        <div class="col-12 justify-center q-py-md">
+          <q-separator spaced inset color="grey-3" />
+        </div>
         <div class="row col-12 justify-center q-py-md">
           <q-btn
             class="col-12"
             color="black"
-            label="Continuar"
+            icon="fa-solid fa-square-envelope"
+            outline
+            label="Criar nova conta"
+            no-caps
             @click="checkContinue()"
             square
           />
-        </div>
-        <div class="col-12 justify-center q-py-md">
-          <q-separator spaced inset color="grey-3" />
         </div>
         <div class="row col-12 justify-center q-py-md">
           <q-btn
@@ -71,7 +97,7 @@
       </div>
     </div>
   </div>
-  <SignDialog v-model:model-value="showLogin" :title="title"></SignDialog>
+
   <SignupDialog v-model:model-value="showSignup" :title="title"></SignupDialog>
 </template>
 
@@ -79,14 +105,40 @@
 import { onMounted, ref } from "vue";
 import PoliticsComponent from "src/components/Generic/PoliticsComponent/PoliticsComponent.vue";
 import countryComponent from "src/components/Generic/countryComponent/countryComponent.vue";
-import SignDialog from "src/components/Backoffice/DialogsComponent/SignDialog/SignDialog.vue";
 import SignupDialog from "src/components/Backoffice/DialogsComponent/SignupDialog/SignupDialog.vue";
 
 const showSignup = ref(false);
 const showLogin = ref(false);
-
+const email = ref(null);
+const right = ref(false);
+const accepted = ref([]);
 const text = ref(null);
-
+const options = [
+  {
+    label: "Mulher",
+    value: "rock",
+  },
+  {
+    label: "Homem",
+    value: "funk",
+  },
+  {
+    label: "Tamanhos grandes",
+    value: "pop",
+  },
+  {
+    label: "Crianças",
+    value: "popd",
+  },
+  {
+    label: "Casa & Sala",
+    value: "popwd",
+  },
+  {
+    label: "Artigos para animais",
+    value: "popqwd",
+  },
+];
 defineOptions({
   name: "SignClientComponent",
 });
@@ -103,11 +155,12 @@ const props = defineProps({
 });
 
 const checkContinue = () => {
-  if (text.value && text.value.toLowerCase() === "tem") {
+  showSignup.value = true;
+  /* if (text.value && text.value.toLowerCase() === "tem") {
     showLogin.value = true;
   } else {
     showSignup.value = true;
-  }
+  } */
 };
 
 onMounted(() => {});

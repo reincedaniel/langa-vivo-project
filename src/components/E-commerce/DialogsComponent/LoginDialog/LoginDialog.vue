@@ -23,8 +23,10 @@
               </div>
               <div class="col-12 justify-center q-py-md">
                 <q-input
+                  @update:model-value="updateEmail()"
+                  @input="updateEmail()"
                   stack-label
-                  v-model="text"
+                  v-model="emailUser"
                   square
                   outlined
                   dense
@@ -73,10 +75,10 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import PoliticsComponent from "src/components/Generic/PoliticsComponent/PoliticsComponent.vue";
 
-const text = ref(null);
+const emailUser = ref(null);
 
 defineOptions({
   name: "LoginDialog",
@@ -95,18 +97,33 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  email: {
+    type: String,
+    default: "",
+  },
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "update:modelEmail"]);
 
 const dialog = computed(() => {
   return props.modelValue;
 });
-
+const email = computed(() => {
+  return props.email;
+});
+emailUser.value = email;
 const closeDialog = (event) => {
   emit("update:modelValue", false);
 };
 
-onMounted(() => {});
+const updateEmail = () => {
+  emit("update:modelEmail", emailUser.value);
+  console.log("emailUser.value: ", emailUser.value);
+};
+
+/* watch(email, () => {
+  emailUser.value = email;
+  console.log("vv");
+}); */
 </script>
 
 <style scoped></style>

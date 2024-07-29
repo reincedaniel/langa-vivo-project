@@ -5,7 +5,12 @@ import {
   createWebHistory,
   createWebHashHistory,
 } from "vue-router";
-import routes from "./routes";
+// import routes from "./routes";
+import generalRoutes from "./routes/general";
+import adminRoutes from "./routes/admin";
+import buyerRoutes from "./routes/buyer";
+import sellerRoutes from "./routes/seller";
+import navigationGuard from "src/middleware/index";
 
 /*
  * If not building with SSR mode, you can
@@ -15,6 +20,13 @@ import routes from "./routes";
  * async/await or return a Promise which resolves
  * with the Router instance.
  */
+
+const routes = [
+  ...generalRoutes,
+  ...adminRoutes,
+  ...buyerRoutes,
+  ...sellerRoutes,
+];
 
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
@@ -32,6 +44,7 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
-
+  // Set beforeEach all router to check token and acl
+  Router.beforeEach(navigationGuard);
   return Router;
 });

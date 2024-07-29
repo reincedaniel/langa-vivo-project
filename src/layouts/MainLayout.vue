@@ -197,9 +197,11 @@ import { useRoute } from "vue-router";
 import { onMounted, ref, computed } from "vue";
 import userEcommerceStore from "src/stores/Components/ecommerce";
 import userMainLayoutStore from "src/stores/Layout/MainLayout";
+import useUserStore from "src/stores/Users";
 
 const ecommerceStore = userEcommerceStore();
 const mainLayoutStore = userMainLayoutStore();
+const userStore = useUserStore();
 
 const route = useRoute();
 const leftDrawerOpen = ref(false);
@@ -239,11 +241,15 @@ const toggleRightDrawer = () => {
 const handleScroll = () => {
   headerHidden.value = window.scrollY > 0; // altere conforme necessário
 };
+const getRoles = async () => {
+  const result = await userStore.getUserById();
+  console.log("Result: ", result);
+};
 
 onMounted(() => {
   leftDrawerOpen.value = false;
   rightDrawerOpen.value = false;
-
+  getRoles();
   window.addEventListener("scroll", handleScroll);
 });
 </script>

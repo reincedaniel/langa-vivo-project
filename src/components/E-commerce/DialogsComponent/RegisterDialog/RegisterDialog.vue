@@ -13,7 +13,10 @@
         <q-btn flat round icon="close" @click="closeDialog" />
       </q-card-section>
       <q-card-section class="row col">
-        <div class="row justify-center items-center full-height">
+        <q-form
+          @submit="register()"
+          class="row justify-center items-center full-height"
+        >
           <div
             class="column col-12 col-sm-8 col-md-6 col-lg-4 justify-center full-height"
           >
@@ -32,9 +35,10 @@
               <div class="col-12 justify-center q-py-md">
                 <q-input
                   stack-label
-                  v-model="text"
+                  v-model="email"
                   square
                   outlined
+                  :rules="[(val) => !!val || '']"
                   dense
                   type="text"
                   color="grey-9"
@@ -44,9 +48,10 @@
               <div class="col-12 justify-center q-py-xs">
                 <q-input
                   stack-label
-                  v-model="text"
+                  v-model="password"
                   square
                   outlined
+                  :rules="[(val) => !!val || '']"
                   dense
                   type="password"
                   color="grey-9"
@@ -86,29 +91,34 @@
                   class="col-12"
                   color="black"
                   label="Registrar"
-                  @click="
-                    () => {
-                      showDetail = true;
-                    }
-                  "
+                  type="submit"
                   square
                 />
               </div>
+              <pre>{{ email }}</pre>
+              <q-space />
+              <pre>{{ password }}</pre>
 
               <PoliticsComponent></PoliticsComponent>
             </div>
           </div>
-        </div>
+        </q-form>
       </q-card-section>
     </q-card>
   </q-dialog>
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, reactive } from "vue";
 import PoliticsComponent from "src/components/Generic/PoliticsComponent/PoliticsComponent.vue";
+import useUserStore from "src/stores/Users";
+import { useQuasar } from "quasar";
+const userStore = useUserStore();
 
-const text = ref(null);
+const email = ref(null);
+const password = ref(null);
+
+const $q = useQuasar();
 
 defineOptions({
   name: "RegisterDialog",
@@ -131,28 +141,16 @@ const props = defineProps({
 
 const options = [
   {
-    label: "Mulher",
-    value: "rock",
+    label: "seller",
+    value: "seller",
   },
   {
-    label: "Homem",
-    value: "funk",
+    label: "buyer",
+    value: "buyer",
   },
   {
-    label: "Tamanhos grandes",
-    value: "pop",
-  },
-  {
-    label: "Crianças",
-    value: "popd",
-  },
-  {
-    label: "Casa & Sala",
-    value: "popwd",
-  },
-  {
-    label: "Artigos para animais",
-    value: "popqwd",
+    label: "admin",
+    value: "admin",
   },
 ];
 const right = ref(false);
@@ -165,6 +163,25 @@ const dialog = computed(() => {
 
 const closeDialog = (event) => {
   emit("update:modelValue", false);
+};
+const register = async () => {
+  try {
+    const result = await userStore.signUp({
+      email: email.value,
+      password: password.value,
+      roles: [accepted.value],
+    });
+    console.log("Result: ", result);
+    $q.notify({
+      message: "Operação realizada com sucesso!",
+      type: "positive",
+    });
+  } catch (error) {
+    $q.notify({
+      message: "Erro ao realizar esta operação.",
+      type: "negative",
+    });
+  }
 };
 
 onMounted(() => {});
