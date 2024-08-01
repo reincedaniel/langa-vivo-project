@@ -28,9 +28,9 @@ export default {
       this.idToken = data.idToken;
       this.refreshToken = data.refreshToken;
       localStorage.setItem("ut", convertJsonToStringify(data));
-      const userProfile = await client.database().from("userProfiles").create({
+      /* const userProfile = await client.database().from("userProfiles").create({
         userId: data.uid,
-      });
+      }); */
 
       return { done: true };
     } catch (error) {

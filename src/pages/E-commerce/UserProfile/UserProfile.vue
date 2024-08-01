@@ -43,7 +43,7 @@
           <q-card-section class="">
             <div class="row">
               <span class="text-body1 text-weight-bold"
-                >Olá, lourenco.carlos2022
+                >Olá, lourenco.carlos2022x
                 <q-badge color="grey" rounded>
                   <q-icon
                     name="fa-solid fa-crown"

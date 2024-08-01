@@ -1,6 +1,6 @@
 <template>
-  <q-card class="shadow-0 q-mt-md" square>
-    <q-card-section>
+  <q-card class="shadow-0" square>
+    <q-card-section v-if="menu">
       <div class="row">
         <span class="text-body1 text-weight-bold">Menu</span>
       </div>
@@ -67,6 +67,10 @@ defineOptions({
 
 const props = defineProps({
   defaultOpened: {
+    type: Boolean,
+    default: false,
+  },
+  menu: {
     type: Boolean,
     default: false,
   },

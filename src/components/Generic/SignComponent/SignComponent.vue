@@ -194,7 +194,7 @@ const login = async () => {
         message: "Operação realizada com sucesso!",
         type: "positive",
       });
-      router.push("/user");
+      router.push("/seller/dashboard");
     } else {
       $q.notify({
         message: "E-mail ou Palavra-Passe incorreta.",

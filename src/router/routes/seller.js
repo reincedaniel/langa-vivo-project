@@ -1,18 +1,19 @@
 // src/router/routes/seller.js
-/* import SellerDashboard from "../../pages/seller/SellerDashboard.vue";
-import SellerProducts from "../../pages/seller/SellerProducts.vue"; */
+/* import SellerDashboard from "../../pages/seller/SellerDashboard.vue";*/
+/* import SellerDashboardPage from "src/pages/Backoffice/SellerDashboardPage.vue"; */
 
 const sellerRoutes = [
-  /*  {
-    path: "/seller/dashboard",
-    component: SellerDashboard,
-    meta: { requiresAuth: true, roles: ["seller"] },
-  },
   {
-    path: "/seller/products",
-    component: SellerProducts,
+    path: "/seller/dashboard",
     meta: { requiresAuth: true, roles: ["seller"] },
-  }, */
+    component: () => import("layouts/UserLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/Backoffice/SellerDashboardPage.vue"),
+      },
+    ],
+  },
 ];
 
 export default sellerRoutes;

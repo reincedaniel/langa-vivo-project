@@ -42,7 +42,7 @@ const commonRoutes = [
     children: [
       {
         path: "",
-        component: () => import("pages/E-commerce/UserProfile/UserProfile.vue"),
+        component: () => import("src/pages/Backoffice/SellerDashboardPage.vue"),
       },
     ],
   },

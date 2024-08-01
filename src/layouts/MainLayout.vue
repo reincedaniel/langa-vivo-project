@@ -249,7 +249,7 @@ const getRoles = async () => {
 onMounted(() => {
   leftDrawerOpen.value = false;
   rightDrawerOpen.value = false;
-  getRoles();
+  // getRoles();
   window.addEventListener("scroll", handleScroll);
 });
 </script>

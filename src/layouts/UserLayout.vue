@@ -51,7 +51,7 @@
         </q-avatar>
       </q-toolbar>
 
-      <q-tabs
+      <!-- <q-tabs
         inline-label
         indicator-color="yellow-7"
         class="bg-black"
@@ -95,7 +95,7 @@
           class="border-button-border"
           no-caps
         />
-      </q-tabs>
+      </q-tabs> -->
     </q-header>
 
     <q-drawer
